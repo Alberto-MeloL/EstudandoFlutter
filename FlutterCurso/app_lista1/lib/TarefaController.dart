@@ -9,7 +9,7 @@ class ListaTarefasController extends ChangeNotifier {
 
   //métodos CRUD
 
-  void adiconarTarefa(String descricao) {
+  void adicionarTarefa(String descricao) {
     _tarefas.add(Tarefa(descricao, false));//construtor do tarefasModel
     notifyListeners();
   }
@@ -31,3 +31,4 @@ class ListaTarefasController extends ChangeNotifier {
 //Programação de Banco de Dados
 //Início 07/02/224
 //Término 21/03/2024
+//19 98434-0203
