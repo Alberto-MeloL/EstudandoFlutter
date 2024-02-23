@@ -6,13 +6,14 @@ import 'package:app_lista1/TarefaModel.dart';
 class ListaTarefasScreen extends StatelessWidget {
   // Controlador para o campo de texto de nova tarefa
   final TextEditingController _controller = TextEditingController();
+  int contadorItem = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       // Barra superior do aplicativo
       appBar: AppBar(
-        title: Text('Lista de Tarefas'),
+        title: Text('Lista de Compras'),
       ),
       // Corpo principal do aplicativo
       body: Column(
@@ -23,7 +24,7 @@ class ListaTarefasScreen extends StatelessWidget {
             child: TextField(
               controller: _controller,
               decoration: InputDecoration(
-                labelText: 'Nova Tarefa',
+                labelText: 'Novo item',
                 // Ícone para adicionar tarefa ao pressionar o botão
                 suffixIcon: IconButton(
                   onPressed: () {
@@ -38,6 +39,14 @@ class ListaTarefasScreen extends StatelessWidget {
               ),
             ),
           ),
+          SizedBox(height: 10.0),
+          ElevatedButton(onPressed: (){
+            Provider.of<ListaTarefasController>(context, listen: false).AdiconarQntItem();
+          }, child: Text('+')),
+          SizedBox(height: 10.0),
+          ElevatedButton(onPressed: () {
+            Provider.of<ListaTarefasController>(context, listen: false).RemoverQntItem();
+          }, child: Text('-')),
           // Lista de tarefas usando um Consumer do Provider para atualização automática
           Expanded(
             child: Consumer<ListaTarefasController>(
