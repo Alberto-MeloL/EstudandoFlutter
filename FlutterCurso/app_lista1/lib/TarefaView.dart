@@ -34,19 +34,25 @@ class ListaTarefasScreen extends StatelessWidget {
                     // Limpar o campo de texto após adicionar a tarefa
                     _controller.clear();
                   },
-                  icon: Icon(Icons.add),
+                  icon: Icon(Icons.shopping_cart),
                 ),
               ),
             ),
           ),
           SizedBox(height: 10.0),
-          ElevatedButton(onPressed: (){
-            Provider.of<ListaTarefasController>(context, listen: false).AdiconarQntItem();
-          }, child: Text('+')),
+          ElevatedButton(
+              onPressed: () {
+                Provider.of<ListaTarefasController>(context, listen: false)
+                    .AdiconarQntItem();
+              },
+              child: Text('+')),
           SizedBox(height: 10.0),
-          ElevatedButton(onPressed: () {
-            Provider.of<ListaTarefasController>(context, listen: false).RemoverQntItem();
-          }, child: Text('-')),
+          ElevatedButton(
+              onPressed: () {
+                Provider.of<ListaTarefasController>(context, listen: false)
+                    .RemoverQntItem();
+              },
+              child: Text('-')),
           // Lista de tarefas usando um Consumer do Provider para atualização automática
           Expanded(
             child: Consumer<ListaTarefasController>(
@@ -76,6 +82,23 @@ class ListaTarefasScreen extends StatelessWidget {
               },
             ),
           ),
+          Consumer<ListaTarefasController>(
+            builder: (context, model, child){
+              return Text(model.resposta(),
+              style: TextStyle(
+                fontSize: 30,
+              ),);
+            }
+            ),
+          Consumer<ListaTarefasController>(//garante que so o Text seja reconstruído
+            builder: (context, model, child){
+              return Text(model.totalItens().toString(),
+              style: TextStyle(
+                fontSize: 50,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),);
+            })
         ],
       ),
     );

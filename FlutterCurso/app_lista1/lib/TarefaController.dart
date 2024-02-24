@@ -3,10 +3,14 @@ import 'package:flutter/material.dart';
 
 class ListaTarefasController extends ChangeNotifier {
   List<Tarefa> _tarefas = [];
-  String _MensagemAddErro = 'O campo não deve estar vázio';
-  String _MensagemAddOk = 'Mensagem adicionada com sucesso';
-  String _MensagemMarcConcluido = 'Concluido com sucesso';
-  String _MsgExcluida = 'Tarefa excluída';
+  String _resposta = '';
+  String _MsgAddErro = 'O campo não pode estar vazio, ou quantidade inválida.';
+  String _MsgAddOk = 'Item adicionado com sucesso';
+  String _MsgMarcConfirmar = 'Confirmado com sucesso';
+  String _MsgExcluido = 'Excluído com sucesso';
+  String _espaco =
+      '                              '; //eu sei que é um péssima prática
+  //mas ainda não sei outro jeito kkkk
   int _contadorItem = 0;
 
   List<Tarefa> get tarefas =>
@@ -16,15 +20,32 @@ class ListaTarefasController extends ChangeNotifier {
   //métodos CRUD
 
   void adicionarTarefa(String descricao) {
+    String quantidade = _contadorItem.toString();
+
     try {
-      if (descricao.trim().isEmpty) {
+      if (descricao.trim().isEmpty || _contadorItem < 0) {
         //não adiciona os espaços
-        print(_MensagemAddErro);
-      } else {
-        _tarefas
-            .add(Tarefa(descricao.trim(), false)); //construtor do tarefasModel
+        _resposta = _MsgAddErro;
+        print(_MsgAddErro);
         notifyListeners();
-        print(_MensagemAddOk);
+      } else {
+        if (descricao.trim().isNotEmpty && _contadorItem > 0) {
+          _tarefas.add(Tarefa(
+              descricao.trim() +
+                  _espaco +
+                  'Quantidade:' +
+                  quantidade +
+                  _espaco +
+                  'Confirme sua compra ->',
+              false)); //construtor do tarefasModel
+          _contadorItem = 0;
+          notifyListeners();
+          print(_MsgAddOk);
+          _resposta = _MsgAddOk;
+        } else {
+          print(_MsgAddErro);
+          _resposta = _MsgAddErro;
+        }
       }
     } catch (error) {
       print('Erro ao adicionar Tarefa $error');
@@ -35,6 +56,7 @@ class ListaTarefasController extends ChangeNotifier {
   void marcarComoConcluida(int indice) {
     if (indice >= 0 && indice < _tarefas.length) {
       _tarefas[indice].concluido = true;
+      _resposta = _MsgMarcConfirmar;
       notifyListeners();
     }
   }
@@ -42,6 +64,8 @@ class ListaTarefasController extends ChangeNotifier {
   void excluirTarefa(int indice) {
     if (indice >= 0 && indice < _tarefas.length) {
       _tarefas.removeAt(indice);
+      _resposta = _MsgExcluido;
+      notifyListeners();
     }
   }
 
@@ -55,17 +79,24 @@ class ListaTarefasController extends ChangeNotifier {
     }
   }
 
-  void RemoverQntItem(){
+  void RemoverQntItem() {
     try {
       if (_contadorItem > 0) {
-        
-      _contadorItem--;
-      print('Quantidade atual $_contadorItem');
-      notifyListeners();
+        _contadorItem--;
+        print('Quantidade atual $_contadorItem');
+        notifyListeners();
       }
     } catch (error) {
       print('Erro ao remover as quantidades $_contadorItem');
     }
+  }
+
+  int totalItens() {
+    return _contadorItem;
+  }
+
+  String resposta() {
+    return _resposta;
   }
 }
 
