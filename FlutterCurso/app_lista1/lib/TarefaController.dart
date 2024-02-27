@@ -13,6 +13,7 @@ class ListaTarefasController extends ChangeNotifier {
       '                              '; //eu sei que é um péssima prática
   //mas ainda não sei outro jeito kkkk
   int _contadorItem = 0;
+  int _precoTotal = 0;
 
   List<Tarefa> get tarefas =>
       _tarefas; //buscar as tarefas dentro da lista _tarefas
@@ -27,10 +28,9 @@ class ListaTarefasController extends ChangeNotifier {
 
     for (var i = 0; i < _tarefas.length; i++) {
       if (_tarefas[i].descricao.split(' ')[0] == descricao.trim()) {
-        
         indiceTarefaExistente = i;
         tarefaExistente = true;
-        break;//interrompe o fluxo
+        break; //interrompe o fluxo
       }
     }
     // bool itensRepetios = _tarefas.any((tarefa) =>
@@ -38,7 +38,13 @@ class ListaTarefasController extends ChangeNotifier {
     //     descricao.trim()); //se for false é porque não há nenhuma repetida
 
     if (tarefaExistente) {
-      quantidade += _contadorItem.toString();
+      var partes =
+          _tarefas[indiceTarefaExistente].descricao.split('Quantidade:');
+      int quantidadeAtual = int.parse(partes[1].trim().split(' ')[0]);
+      int novaQntd = quantidadeAtual + _contadorItem;
+      quantidade = novaQntd.toString();
+      _tarefas[indiceTarefaExistente].descricao =
+          "${partes[0]}Quantidade: $quantidade ${partes.sublist(1).join('espaco')}";
       _resposta = _ItemExixtente;
       _contadorItem = 0;
       print(_ItemExixtente);
@@ -90,6 +96,7 @@ class ListaTarefasController extends ChangeNotifier {
   void AdiconarQntItem() {
     try {
       _contadorItem++;
+      _precoTotal++;
       print('Quantidae atual $_contadorItem');
       notifyListeners();
     } catch (error) {
@@ -111,6 +118,10 @@ class ListaTarefasController extends ChangeNotifier {
 
   int totalItens() {
     return _contadorItem;
+  }
+
+  int total(){
+    return _precoTotal;
   }
 
   String resposta() {

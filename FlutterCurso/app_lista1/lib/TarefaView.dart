@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:app_lista1/TarefaController.dart';
 import 'package:app_lista1/TarefaModel.dart';
 
+
+//https://api.flutter.dev/flutter/material/DropdownButton-class.html
+
 class ListaTarefasScreen extends StatelessWidget {
   // Controlador para o campo de texto de nova tarefa
   final TextEditingController _controller = TextEditingController();
@@ -13,7 +16,7 @@ class ListaTarefasScreen extends StatelessWidget {
     return Scaffold(
       // Barra superior do aplicativo
       appBar: AppBar(
-        title: Text('Lista de Compras'),
+        title: Text('Lista de Compras \nTudo por RS1,00'),
       ),
       // Corpo principal do aplicativo
       body: Column(
@@ -46,7 +49,15 @@ class ListaTarefasScreen extends StatelessWidget {
                     .AdiconarQntItem();
               },
               child: Text('+')),
-          SizedBox(height: 10.0),
+              Consumer<ListaTarefasController>(//garante que so o Text seja reconstruído
+            builder: (context, model, child){
+              return Text(model.totalItens().toString(),
+              style: TextStyle(
+                fontSize: 50,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),);
+            }),
           ElevatedButton(
               onPressed: () {
                 Provider.of<ListaTarefasController>(context, listen: false)
@@ -82,23 +93,25 @@ class ListaTarefasScreen extends StatelessWidget {
               },
             ),
           ),
-          Consumer<ListaTarefasController>(
-            builder: (context, model, child){
-              return Text(model.resposta(),
+          Consumer<ListaTarefasController>(builder: (context, model, child) {
+            return Text(
+              model.resposta(),
               style: TextStyle(
                 fontSize: 30,
-              ),);
-            }
-            ),
-          Consumer<ListaTarefasController>(//garante que so o Text seja reconstruído
+              ),
+
+            );
+          }),
+           Consumer<ListaTarefasController>(//garante que so o Text seja reconstruído
             builder: (context, model, child){
-              return Text(model.totalItens().toString(),
+              return Text(model.total().toString(),
               style: TextStyle(
                 fontSize: 50,
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
-              ),);
-            })
+              ),
+              );
+  }),
         ],
       ),
     );
