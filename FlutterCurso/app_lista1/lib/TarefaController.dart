@@ -8,6 +8,7 @@ class ListaTarefasController extends ChangeNotifier {
   String _MsgAddOk = 'Item adicionado com sucesso';
   String _MsgMarcConfirmar = 'Confirmado com sucesso';
   String _MsgExcluido = 'Excluído com sucesso';
+  String _ItemExixtente = 'Este item já se encontra lista.';
   String _espaco =
       '                              '; //eu sei que é um péssima prática
   //mas ainda não sei outro jeito kkkk
@@ -20,15 +21,30 @@ class ListaTarefasController extends ChangeNotifier {
   //métodos CRUD
 
   void adicionarTarefa(String descricao) {
+    int indiceTarefaExistente = -1;
+    bool tarefaExistente = false;
     String quantidade = _contadorItem.toString();
 
-    try {
-      if (descricao.trim().isEmpty || _contadorItem < 0) {
-        //não adiciona os espaços
-        _resposta = _MsgAddErro;
-        print(_MsgAddErro);
-        notifyListeners();
-      } else {
+    for (var i = 0; i < _tarefas.length; i++) {
+      if (_tarefas[i].descricao.split(' ')[0] == descricao.trim()) {
+        
+        indiceTarefaExistente = i;
+        tarefaExistente = true;
+        break;//interrompe o fluxo
+      }
+    }
+    // bool itensRepetios = _tarefas.any((tarefa) =>
+    //     tarefa.descricao.split('')[0] ==
+    //     descricao.trim()); //se for false é porque não há nenhuma repetida
+
+    if (tarefaExistente) {
+      quantidade += _contadorItem.toString();
+      _resposta = _ItemExixtente;
+      _contadorItem = 0;
+      print(_ItemExixtente);
+      notifyListeners();
+    } else {
+      try {
         if (descricao.trim().isNotEmpty && _contadorItem > 0) {
           _tarefas.add(Tarefa(
               descricao.trim() +
@@ -43,13 +59,15 @@ class ListaTarefasController extends ChangeNotifier {
           print(_MsgAddOk);
           _resposta = _MsgAddOk;
         } else {
-          print(_MsgAddErro);
+          //não adiciona os espaços
           _resposta = _MsgAddErro;
+          print(_MsgAddErro);
+          notifyListeners();
         }
+      } catch (error) {
+        print('Erro ao adicionar Tarefa $error');
+        //on Exception tipo específico
       }
-    } catch (error) {
-      print('Erro ao adicionar Tarefa $error');
-      //on Exception tipo específico
     }
   }
 
@@ -99,6 +117,3 @@ class ListaTarefasController extends ChangeNotifier {
     return _resposta;
   }
 }
-
-
-//19 98434-0203
