@@ -11,7 +11,6 @@ Widget build(BuildContext context){
     //definindo a tela inicial como a ListaTarefas
     home: ChangeNotifierProvider(create: (context) => ListaTarefasController(),
     child: ListaTarefasScreen(),)
-  
   );
 }
   //como se fosse o router do Angular

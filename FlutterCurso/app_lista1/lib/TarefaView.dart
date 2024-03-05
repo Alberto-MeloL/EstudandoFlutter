@@ -44,7 +44,7 @@ class ListaTarefasScreen extends StatelessWidget {
           ),
           SizedBox(height: 10.0),
           ElevatedButton(
-              onPressed: () {
+              onPressed: () { 
                 Provider.of<ListaTarefasController>(context, listen: false)
                     .AdiconarQntItem();
               },
@@ -104,7 +104,7 @@ class ListaTarefasScreen extends StatelessWidget {
           }),
            Consumer<ListaTarefasController>(//garante que so o Text seja reconstruído
             builder: (context, model, child){
-              return Text(model.total().toString(),
+              return Text("Valo Total R\$"  + model.total().toString(),
               style: TextStyle(
                 fontSize: 50,
                 color: Colors.black,
