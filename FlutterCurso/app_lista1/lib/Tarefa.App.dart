@@ -2,7 +2,6 @@ import 'package:app_lista1/TarefaController.dart';
 import 'package:app_lista1/TarefaView.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 class ListaTarefasApp extends StatelessWidget {
   
   @override
