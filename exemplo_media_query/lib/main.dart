@@ -79,21 +79,48 @@ class MyApp extends StatelessWidget {
                 children: [
                   TextField(
                       decoration: InputDecoration(
-                          icon: new Icon(Icons.search),
-                          labelText: "Buscar...",
+                          icon: new Icon(Icons.person),
+                          labelText: "Nome",
                           enabledBorder: const OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(20)),
                           ),
                           focusedBorder: const OutlineInputBorder(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(15))),
+                                  BorderRadius.all(Radius.circular(5))),
                           contentPadding: EdgeInsets.symmetric(
                               vertical: 10.0, horizontal: 10.0))),
+                  ElevatedButton.icon(
+                      onPressed: () {},
+                      icon: new Icon(Icons.message),
+                      label: Text('Mensagem'))
                 ],
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                'Formulário Básico',
+                style: TextStyle(fontSize: 20),
+              ),
+              Container(
+                child: Column(
+                  children: [
+                    TextField(
+                      decoration: InputDecoration(
+                          labelText: "Your name...",
+                          prefixIcon: new Icon(Icons.near_me),
+                          border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)))),
+                    ),
+                    ElevatedButton(onPressed: (){}, child: Text('Enviar'),)
+                  ],
+                ),
               )
             ],
           ),
         ),
+        backgroundColor: Colors.green,
       ),
     );
   }
