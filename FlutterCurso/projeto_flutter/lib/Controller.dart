@@ -27,7 +27,7 @@ class Controller {
   }
 }
 
-Future<String> fazerLogin(String email, String senha) async{
+// Future<String> fazerLogin(String email, String senha) async{
 
-  
-}
+
+// }
