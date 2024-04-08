@@ -26,3 +26,8 @@ class Controller {
     return id;
   }
 }
+
+Future<String> fazerLogin(String email, String senha) async{
+
+  
+}

@@ -13,6 +13,7 @@ class _LoginState extends State<Login> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Página de Login"),
+        backgroundColor: Colors.amber,
       ),
       body: Center(
         child: Column(
@@ -35,7 +36,13 @@ class _LoginState extends State<Login> {
             SizedBox(
               height: 20,
             ),
-            ElevatedButton(onPressed: (){}, child: Text("Entrar"))
+            ElevatedButton(
+                onPressed: () {},
+                child: Text(
+                  "Entrar",
+                  style: TextStyle(color: Colors.amber),
+                ),
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.black))
           ],
         ),
       ),

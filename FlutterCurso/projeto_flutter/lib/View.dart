@@ -9,27 +9,36 @@ class ViewScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Tela Inicial"),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             ElevatedButton(
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Login()));
-                },
-                child: Text("Login")),
+              onPressed: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Login()));
+              },
+              child: Text(
+                "Login",
+                style: TextStyle(color: Colors.black),
+              ),
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.amber),
+            ),
             SizedBox(
               height: 10,
             ),
             ElevatedButton(
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Cadastro()));
-                },
-                child: Text("Cadastrar-me"))
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Cadastro()));
+              },
+              child: Text(
+                "Cadastrar-me",
+                style: TextStyle(color: Colors.black),
+              ),
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.amber),
+            )
           ],
         ),
       ),

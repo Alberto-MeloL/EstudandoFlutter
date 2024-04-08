@@ -21,6 +21,7 @@ class _CadastroState extends State<Cadastro> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Tela de Cadastro"),
+        backgroundColor: Colors.amber,
       ),
        body: Container(
         child: Column(
@@ -60,7 +61,7 @@ class _CadastroState extends State<Cadastro> {
                 _emailController.text,
                 _senhaController.text
                 );
-            }, child: Text("Cadastrar-me")
+            }, child: Text("Cadastrar-me", style: TextStyle(color: Colors.amber),), style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
             )
           ],
         ),

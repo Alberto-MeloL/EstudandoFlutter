@@ -21,7 +21,8 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home"),//porque aqui precisa do Text()?
+        backgroundColor: Colors.amber,
+        title: Text("Projeto Flutter"),
       ),
        body: ViewScreen(),
     );
