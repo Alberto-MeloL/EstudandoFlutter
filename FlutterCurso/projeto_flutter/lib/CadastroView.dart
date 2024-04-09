@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'Controller.dart';
+import 'Controller.dart'; // Certifique-se de que o caminho do import está correto
 
 class Cadastro extends StatefulWidget {
   const Cadastro({super.key});
@@ -9,13 +9,37 @@ class Cadastro extends StatefulWidget {
 }
 
 class _CadastroState extends State<Cadastro> {
-  //instanciando os TextEditingController, para recuperar o que foi digitado em cada input
+  // Utilizando os TextEditingController para recuperar o que foi digitado em cada input
   final TextEditingController _nomeController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _senhaController = TextEditingController();
 
-  //instanciando o controller
+  // Instanciando o controller
   final Controller _controller = Controller();
+
+  @override
+  void dispose() {
+    // Limpeza dos controllers ao sair da tela
+    _nomeController.dispose();
+    _emailController.dispose();
+    _senhaController.dispose();
+    super.dispose();
+  }
+
+  void _cadastrarUsuario() async {
+    final int id = await _controller.createUsuario(
+      _nomeController.text,
+      _emailController.text,
+      _senhaController.text,
+    );
+
+    // Feedback para o usuário
+    String mensagem = (id != 0) ? 'Cadastro bem-sucedido!' : 'Erro ao cadastrar.';
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(mensagem)),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,57 +48,50 @@ class _CadastroState extends State<Cadastro> {
         backgroundColor: Colors.amber,
       ),
        body: Container(
-        child: Column(
-          children: [
-            TextField(
-              decoration: InputDecoration(
-                  labelText: 'Seu nome',
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20))),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            TextField(
-              decoration: InputDecoration(
-                  labelText: 'Seu E-mail',
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20))),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            TextField(
-              decoration: InputDecoration(
-                  labelText: 'Sua senha',
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20))),
-                      obscureText: true,//esconde a senha
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            ElevatedButton(onPressed: () async{
-
-              int id = await _controller.createUsuario(
-                _nomeController.text,
-                _emailController.text,
-                _senhaController.text
-                );
-            }, child: Text("Cadastrar-me", style: TextStyle(color: Colors.amber),), style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
-            )
-          ],
+        padding: EdgeInsets.all(16), // Adiciona um padding ao redor da coluna
+        child: SingleChildScrollView( // Permite rolar a tela se o teclado cobrir o conteúdo
+          child: Column(
+            children: [
+              TextField(
+                controller: _nomeController, // Associando o controller
+                decoration: InputDecoration(
+                    labelText: 'Seu nome',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20))),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              TextField(
+                controller: _emailController, // Associando o controller
+                decoration: InputDecoration(
+                    labelText: 'Seu E-mail',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20))),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              TextField(
+                controller: _senhaController, // Associando o controller
+                decoration: InputDecoration(
+                    labelText: 'Sua senha',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20))),
+                obscureText: true, // Esconde a senha
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              ElevatedButton(
+                onPressed: _cadastrarUsuario,
+                child: Text("Cadastrar-me", style: TextStyle(color: Colors.amber)),
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
+              )
+            ],
+          ),
         ),
       ),
     );
   }
-  //ctrl + alt
-      @override
-      void dispose(){
-
-        _nomeController.dispose();
-        _emailController.dispose();
-        _senhaController.dispose();
-        super.dispose();
-      }
 }
