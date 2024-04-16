@@ -1,26 +1,25 @@
-// import 'package:flutter/material.dart';
-// import 'package:projeto_flutter/HomePage.dart';
-// import 'package:projeto_flutter/Controller.dart';
+import 'package:flutter/material.dart';
+import 'package:projeto_flutter/HomePage.dart';
+import 'package:projeto_flutter/Controller.dart';
 
-// void main() async{
+void main() async{
 
-//   WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
 
-// final Controller controller = Controller();
-// final bool temaEscuro = await Controller.getTemaSalvo();
+final Controller controller = Controller();
+final bool temaEscuro = await Controller.getTemaSalvo();
 
-//   runApp(MyApp(temaEscuro:temasEscuro));
-// }
+}
 
-// class MyApp extends StatelessWidget {
+class MyApp extends StatelessWidget {
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       title: "Persistência de Dados",
-//       theme: ThemeData(
-//         primarySwatch: Colors.blue
-//       ),home: HomePage(),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: "Persistência de Dados",
+      theme: ThemeData(
+        primarySwatch: Colors.blue
+      ),home: HomePage(),
+    );
+  }
+}
