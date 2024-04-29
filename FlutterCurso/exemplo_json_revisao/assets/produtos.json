@@ -1,0 +1,22 @@
+[
+    {
+        "nome": "Teclado Mouse Gamer",
+        "categoria": "Monitor",
+        "preco": 20.99
+    },
+    {
+        "nome": "Mouse Gamer",
+        "categoria": "Monitor",
+        "preco": 20.99
+    },
+    {
+        "nome": "Gamer",
+        "categoria": "Monitor",
+        "preco": 20.99
+    },
+    {
+        "nome": "Mouse",
+        "categoria": "Monitor",
+        "preco": 20.99
+    }
+]
