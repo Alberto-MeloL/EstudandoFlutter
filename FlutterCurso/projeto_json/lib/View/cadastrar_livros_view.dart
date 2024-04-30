@@ -10,6 +10,10 @@ class CadastroPage extends StatefulWidget {
 class _CadastroPageState extends State<CadastroPage> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(backgroundColor: Colors.indigo,
+      title: const Text("Página De Cadastro"),),
+    );
+
   }
 }
