@@ -1,27 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:proj_api_geo/view/favorites_screen.dart';
-import 'package:proj_api_geo/view/home_screen.dart';
-import 'package:proj_api_geo/view/datails_screen.dart';
-import 'package:proj_api_geo/view/search_screen.dart';
 
-void main(){
-  runApp(const Myapp());
+// import 'view/datails_screen.dart';
+import 'View/favorites_screen.dart';
+import 'View/home_screen.dart';
+import 'View/search_screen.dart';
+
+void main() {
+  runApp(const MyApp());
 }
 
-class Myapp extends StatelessWidget {
-  const Myapp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Projeto API GEO',
-      home: HomeScreen(),
-      // routes: {
-      //   '/home': (context) => HomeScreen(),
-      //   '/favorites': (context) => FavoriteScreen(),
-      //   '/search': (context) => SearchScreen(),
-      //   '/details': (context) => DetailsScreen()
-      // },
+    return MaterialApp(
+      title: "Projeto API GEO",
+      home: const HomeScreen(),
+      routes:{
+        '/home': (context) => const HomeScreen(),
+        '/favorites': (context) => const FavoriteScreen(),
+        '/search': (context) => const SearchScreen(),
+        // '/details': (context) => WeatherDetailsScreen(cityName: '',)
+      }
     );
   }
 }

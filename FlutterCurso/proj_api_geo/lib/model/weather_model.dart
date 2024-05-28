@@ -2,7 +2,7 @@ class Weather {
   // amguns atributos da api
   final String name;
   final String main;
-  final String temp;
+  final double temp;
   final String description;
   final double tempMax;
   final double tempMin;
@@ -20,12 +20,12 @@ class Weather {
 factory Weather.fromJson(Map<String, dynamic> json){
 
   return Weather(
-  name: json['name'],
-  main: json['main'][0]['main'],
-  temp: json['main'][0]['temp'],
-  description: json['weather'][0]['description'],
-  tempMax: json['main']['temp_max'],
-  tempMin: json['main']['temp_min']
+ name: json['name'],
+      description: json['weather'][0]['description'],
+      main: json['weather'][0]['main'],
+      temp: json['main']['temp'],
+      tempMax: json['main']['temp_max'],
+      tempMin: json['main']['temp_min'],
   );
 }
 }

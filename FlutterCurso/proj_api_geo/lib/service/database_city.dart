@@ -1,67 +1,68 @@
-import 'package:path/path.dart';
-import 'package:proj_api_geo/model/weather_model.dart';
+// ignore_for_file: non_constant_identifier_names, avoid_print
+
 import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart';
+import '../Model/city_model.dart';
 
-//configurações dp banco de dados
-class CRUD {
-  static const String DataBase = 'city.db'; //static const etc...
-  static const String Table = 'city';
-  static const String CreateTable = "CREATE TABLE IF NOT EXISTS city(city TEXT)";
-
-//com * no async
-  Future<Database> _getDataBase() async {
-    return openDatabase(join(await getDatabasesPath(), DataBase),
-        onCreate: (db, version) => {db.execute(CreateTable)}, version: 1);
+class CityDbService {
+  final String DATABASE_NAME = 'city_db.db'; // Nome do banco de dados
+  final String TABLE_NAME = 'city'; // Nome da tabela
+  final String CREATE_TABLE_SCRIPT = // Script SQL para criar a tabela
+      """CREATE TABLE city(
+          cityname TEXT PRIMARY KEY, 
+          favoritescities BOOLEAN
+          )""";
+  //método openDatabase
+  Future<Database> _openDatabase() async {
+    return await openDatabase(
+     join(await getDatabasesPath(), DATABASE_NAME),
+     onCreate: (db, version) => CREATE_TABLE_SCRIPT,
+     version: 1,
+    );
   }
-
-//inserir um usuario
-  Future<void> create(Weather weather) async {
+  //crud
+  //inserção no banco de dados
+  Future<void> insertCity(City city) async {
     try {
-      final Database db = await _getDataBase();
-      await db.insert(Table, weather.name as Map<String, Object?>);
-    } catch (error) {
-      print(error);
-      return;
+      Database db = await _openDatabase();
+      db.insert(TABLE_NAME, city.toMap());
+      db.close();  
+    } catch (e) {
+      print(e);
+    }   
+  }
+  //listagem
+  Future<List<Map<String,dynamic>>> listCity() async {
+    try {
+      Database db = await _openDatabase();
+      List<Map<String, dynamic>> maps = await db.query(TABLE_NAME);
+      db.close();
+      return maps;
+    } catch (e) {
+      print(e);
+      return [];
+    }
+  }
+  //delete
+  Future<void> deleteCity(String city) async {
+    try {
+      Database db = await _openDatabase();
+      db.delete(TABLE_NAME, where: 'cityname =?', whereArgs: [city]);
+      db.close();
+    } catch (e) {
+      print(e);
+    }
+  }
+  //update favoritesCities
+  Future<void> updateCity(City city) async {
+    try {
+      Database db = await _openDatabase();
+      db.update(TABLE_NAME, city.toMap(), where: 'cityname =?', whereArgs: [city.cityName]);
+      db.close();
+    } catch (e) {
+      print(e);
     }
   }
 
-//pegar um usuario
-  Future<Weather?> getCity(String city) async {
-    try {
-      final Database db = await _getDataBase();
-      final List<Map<String, dynamic>> maps = await db.query(Table,
-          where: 'city = ?', whereArgs: [city]);
-
-          //se nao for vazio
-          if (maps.isNotEmpty) {
-            return Weather.fromJson(maps[0]);
-          }else{
-            return null;
-          }
-    } catch (error) {
-      print(error);
-      return null;
-    }
-  }
-
-  //verificar se existe um usuario
-  Future<bool> existsCity(String city) async{
-    try {
-      final Database db = await _getDataBase();
-   final List<Map<String, dynamic>> maps =
-          await db.query(Table,
-          where: 'city = ?',
-          whereArgs: [city]
-          ); // Consulta todos os contatos na Table
-
-      if (maps.isNotEmpty){
-        return true;
-      }else{
-        return false;
-      }
-    } catch (ex) {
-      print(ex);
-      return false;
-    }
-  }
+// 
 }

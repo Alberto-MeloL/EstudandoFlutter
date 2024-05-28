@@ -1,14 +1,16 @@
+// ignore_for_file: avoid_print
+
 import 'package:proj_api_geo/model/weather_model.dart';
 import 'package:proj_api_geo/service/weather_service.dart';
 
 class WeatherController {
-  List<Weather> _weatherList = [];
+  final List<Weather> _weatherList = [];
 
 // get
   List<Weather> get weatherList => _weatherList;
 
 // serviço
-  WeatherService _service = WeatherService();
+  final WeatherService _service = WeatherService();
 // métodos
 
 // apos criar a axceção no service, eu trato ela aqui no controller
@@ -17,8 +19,8 @@ class WeatherController {
       Weather weather = Weather.fromJson(await _service.getWeather(city));
       _weatherList.add(weather);
     } catch (e) {
-      print('Erro no controller');
-      print(e);
+      // ignore: avoid_print
+      print('Erro no controller $e',);
     }
   }
 
@@ -29,7 +31,18 @@ class WeatherController {
       _weatherList.add(weather);
     } catch (e) {
       print('Erro no controller');
+      // ignore: avoid_print
       print(e);
+    }
+  }
+
+  // fazer buscas relacionadas
+  Future<bool> findCity(String city) async {
+    try {
+      return await _service.findCity(city);
+    } catch (e) {
+      print(e);
+      return false;
     }
   }
 }
