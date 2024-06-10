@@ -67,7 +67,7 @@ ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Email ou senh
                       borderRadius: BorderRadius.circular(20))),
               obscureText: true, // Isso torna o texto do campo de senha oculto
             ),
-            const SizedBox(
+            const SizedBox( 
               height: 20,
             ),
             ElevatedButton(

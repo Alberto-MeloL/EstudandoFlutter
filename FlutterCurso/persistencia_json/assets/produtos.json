@@ -1,0 +1,21 @@
+[
+    {
+        "produtos": [
+            {
+                "nome": "Mouse",
+                "preco": 20,
+                "categoria": "Informática"
+            },
+            {
+                "nome": "Teclado",
+                "preco": 90,
+                "categoria": "Informática"
+            },
+            {
+                "nome": "Monitor",
+                "preco": 2000,
+                "categoria": "Informática"
+            }
+        ]
+    }
+]
