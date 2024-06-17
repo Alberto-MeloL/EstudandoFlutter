@@ -1,0 +1,53 @@
+{
+  "produtos": [
+    {
+      "nome": "Fonte 600W",
+      "preco": 500,
+      "categoria": "Periféricos",
+      "foto": "assets/img/img.png",
+      "id": "91a5"
+    },
+    {
+      "nome": "Mouse Mágico",
+      "preco": 700,
+      "categoria": "Acessórios",
+      "foto": "assets/img/img.png",
+      "id": "c352"
+    },
+    {
+      "nome": "Casaco Tux",
+      "preco": 100,
+      "categoria": "Vestuário",
+      "foto": "assets/img/img.png",
+      "id": "2380"
+    },
+    {
+      "nome": "Monior 21",
+      "preco": 1000,
+      "categoria": "Periféricos",
+      "foto": "assets/img/img.png",
+      "id": "4074"
+    },
+    {
+      "id": "123",
+      "nome": "Fonte2 600W",
+      "preco": 5002,
+      "categoria": "Periférico3",
+      "foto": "assets/img/img.png"
+    },
+    {
+      "id": "123",
+      "nome": "Fonte2 600W",
+      "preco": 5002,
+      "categoria": "Periférico3",
+      "foto": "assets/img/img.png"
+    },
+    {
+      "id": "123",
+      "nome": "Fonte2 600W",
+      "preco": 5002,
+      "categoria": "Periférico3",
+      "foto": "assets/img/img.png"
+    }
+  ]
+}
