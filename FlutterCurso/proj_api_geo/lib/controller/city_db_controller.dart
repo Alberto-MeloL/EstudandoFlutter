@@ -1,35 +1,34 @@
 import 'package:proj_api_geo/service/database_city.dart';
-
 import '../Model/city_model.dart';
 
 class CityDbController {
-  //atributos
+  // Atributos
   List<City> _cities = [];
   final CityDbService _service = CityDbService();
-  //get cities
-  List<City> cities() => _cities;
 
-  //métodos
-  //list from db
+  // Getter para cidades
+  List<City> get cities => _cities;
+
+  // Métodos
+  // Lista de cidades do banco de dados
   Future<List<City>> listCities() async {
     List<Map<String, dynamic>> maps = await _service.listCity();
-    // for(Map<String,dynamic> map in maps){
-    //     _cities.add(City.fromMap(map));
-    //   }
     _cities = maps.map<City>((e) => City.fromMap(e)).toList();
     return _cities;
   }
-  //add city
+
+  // Adicionar cidade
   Future<void> addCity(City city) async {
     await _service.insertCity(city);
   }
-  //update city
+
+  // Atualizar cidade
   Future<void> updateCity(City city) async {
     await _service.updateCity(city);
   }
 
-  // delete city
-  Future<void> deleteCity(String city) async {
-    await _service.deleteCity(city);
+  // Deletar cidade
+  Future<void> deleteCity(String cityName) async {
+    await _service.deleteCity(cityName);
   }
 }

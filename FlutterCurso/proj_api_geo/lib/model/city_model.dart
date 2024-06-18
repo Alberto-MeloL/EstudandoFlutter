@@ -1,17 +1,21 @@
 class City {
-// atributos
+  // Atributos
   final String cityName;
   final bool favoritesCities;
 
+  // Construtor
   City({required this.cityName, required this.favoritesCities});
 
+  // Converter City para Map
   Map<String, dynamic> toMap() {
-    // normalização de banco de dados
-    return {'cityname': cityName, 'favoritescities': favoritesCities};
+    return {'cityName': cityName, 'favoritesCities': favoritesCities ? 1 : 0};
   }
 
+  // Criar City a partir de Map
   factory City.fromMap(Map<String, dynamic> map) {
     return City(
-        cityName: map['cityname'], favoritesCities: map['favoritescities']);
+      cityName: map['cityName'],
+      favoritesCities: map['favoritesCities'] == 1,
+    );
   }
 }

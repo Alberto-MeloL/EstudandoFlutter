@@ -23,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
     try {
       Position _position = await Geolocator.getCurrentPosition();
       print(_position.latitude);
-      _controller.getWeatherByLocation(_position.latitude, _position.longitude);
+      _controller.getWeatherbyLocation(_position.latitude, _position.longitude);
       setState(() {});
     } catch (e) {
       print(e);

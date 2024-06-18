@@ -1,10 +1,7 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
 import 'package:proj_api_geo/Controller/city_db_controller.dart';
-import 'package:proj_api_geo/Controller/weather_controller.dart';
-import 'package:proj_api_geo/View/datails_screen.dart';
-
+import 'package:proj_api_geo/controller/weather_controller.dart';
+import 'package:proj_api_geo/view/datails_screen.dart';
 import '../Model/city_model.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -23,9 +20,9 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Search")),
+      appBar: AppBar(title: Text("Search")),
       body: Padding(
-        padding: const EdgeInsets.all(12),
+        padding: EdgeInsets.all(12),
         child: Center(
           child: Form(
               key: _formKey,
@@ -35,7 +32,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   TextFormField(
                       controller: _cityController,
                       decoration:
-                         const InputDecoration(hintText: "Enter the city name"),
+                          InputDecoration(hintText: "Enter the city name"),
                       validator: (value) {
                         if (value!.trim().isEmpty) {
                           return "Please enter a city";
@@ -50,23 +47,25 @@ class _SearchScreenState extends State<SearchScreen> {
                       },
                       child: const Text("Search")),
                       const SizedBox(height: 12,),
-                      FutureBuilder(
-                        future: _dbController.listCities(), 
-                        builder: (context,snapshot){
-                          if(_dbController.cities().isNotEmpty){
-                            return ListView.builder(
-                                itemCount: _dbController.cities().length,
-                                itemBuilder: (context, index) {
-                                  return ListTile(
-                                    title: Text(_dbController.cities()[index].cityName),
-                                    onTap: () {
-                                      //
-                                    },
-                                  );
-                                });
-                          }
-                          return const Center(child: Text("Empty Location"));
-                        })
+                      Expanded(
+                        child: FutureBuilder(
+                          future: _dbController.listCities(), 
+                          builder: (context,snapshot){
+                            if(_dbController.cities.isNotEmpty){
+                              return ListView.builder(
+                                  itemCount: _dbController.cities.length,
+                                  itemBuilder: (context, index) {
+                                    return ListTile(
+                                      title: Text(_dbController.cities[index].cityName),
+                                      onTap: () {
+                                        //
+                                      },
+                                    );
+                                  });
+                            }
+                            return const Center(child: Text("Empty Location"));
+                          }),
+                      )
 
                 ],
               )),
@@ -78,7 +77,7 @@ class _SearchScreenState extends State<SearchScreen> {
   Future<void> _cityFind(String city) async {
     if (await _controller.findCity(city)) {
       //snackbar
-       City cityadd = City(cityName:city,favoritesCities:false);
+       City cityadd = City(cityName:city,favoritesCities:true);
       _dbController.addCity(cityadd);
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
