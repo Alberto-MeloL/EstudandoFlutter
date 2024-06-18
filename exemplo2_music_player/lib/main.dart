@@ -1,4 +1,4 @@
-import 'package:exemplo2_music_player/screens/home_screen.dart';
+import 'package:exemplo2_music_';
 import 'package:flutter/material.dart';
 
 void main() {

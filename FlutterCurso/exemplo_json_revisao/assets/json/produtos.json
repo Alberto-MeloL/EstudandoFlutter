@@ -1,0 +1,19 @@
+{
+  "produtos": [
+    {
+      "nome": "Fonte 600W",
+      "preco": 500,
+      "categoria": "Periféricos",
+      "foto": "assets/img/img.png",
+      "id": "91a5"
+    },
+    {
+      "nome": "Mouse Mágico",
+      "preco": 700,
+      "categoria": "Acessórios",
+      "foto": "assets/img/img.png",
+      "id": "c352"
+    }
+    
+  ]
+}

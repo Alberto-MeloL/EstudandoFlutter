@@ -4,17 +4,18 @@ import 'package:sqflite/sqflite.dart';
 
 //configurações dp banco de dados
 class CRUD {
-  static const String BancoDados = 'usuarios.db'; //static const etc...
-  static const String Tabela = 'usuarios';
-  static const String CraiarTAbela = "CREATE TABLE IF NOT EXISTS usuarios(" +
+  static const String BancoDados = 'usuario.db'; //static const etc...
+  static const String Tabela = 'usuario';
+  static const String CraiarTAbela = "CREATE TABLE IF NOT EXISTS user(" +
       "id SERIAL PRIMARY KEY," +
       "nome TEXT, email TEXT UNIQUE," +
+      "idade TEXT"+
       "senha TEXT)";
 
 //com * no async
   Future<Database> _getDataBase() async {
     return openDatabase(join(await getDatabasesPath(), BancoDados),
-        onCreate: (db, version) => {db.execute(CraiarTAbela)}, version: 1);
+      onCreate: (db, version) => {db.execute(CraiarTAbela)}, version: 1);
   }
 
 //inserir um usuario

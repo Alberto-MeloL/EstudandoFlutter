@@ -14,8 +14,7 @@ class RegistroScreen extends StatefulWidget {
 class _RegistroScreenState extends State<RegistroScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-      TextEditingController();
+  final TextEditingController _confirmPasswordController =TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final AuthService _authService = AuthService();
@@ -63,7 +62,7 @@ class _RegistroScreenState extends State<RegistroScreen> {
     );
   }
 
-  Future<User?> _registrar() async {
+  Future<void> _registrar() async {
     if (_confirmPasswordController == _passwordController) {
       if (_formKey.currentState!.validate()) {
         return _authService.registerWithEmail(
